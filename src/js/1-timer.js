@@ -1,12 +1,12 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
-import iziToast from "izitoast";
-import "izitoast/dist/css/iziToast.min.css";
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 
-const datetimePicker = document.querySelector("#datetime-picker")
-const startButton = document.querySelector("button")
-const daysData = document.querySelector("[data-days]")
+const datetimePicker = document.querySelector('#datetime-picker');
+const startButton = document.querySelector('button');
+const daysData = document.querySelector('[data-days]');
 const hoursData = document.querySelector('[data-hours]');
 const minutesData = document.querySelector('[data-minutes]');
 const secondsData = document.querySelector('[data-seconds]');
@@ -36,14 +36,14 @@ const options = {
   },
 };
 function startTimer() {
-  if (timerIsRunning){
+  if (timerIsRunning) {
     clearInterval(countdownInterval);
     countdownInterval = null;
   }
-  timerIsRunning= true;
+  timerIsRunning = true;
   countdownInterval = setInterval(updateTimer, 1000, userDate);
   startButton.disabled = true;
-};
+}
 
 function updateTimer(userDate) {
   const currentDate = new Date();
@@ -61,33 +61,29 @@ function updateTimer(userDate) {
   }
 }
 
-
-startButton.addEventListener("click", () => {
+startButton.addEventListener('click', () => {
   if (userDate && !timerIsRunning) {
     startTimer();
   }
-}
-)
+});
 
 function stopTimer() {
   if (countdownInterval) {
-    
-  clearInterval(countdownInterval);
+    clearInterval(countdownInterval);
 
     daysData.textContent = '00';
     hoursData.textContent = '00';
     minutesData.textContent = '00';
     secondsData.textContent = '00';
-    
+
     countdownInterval = null;
     timerIsRunning = false;
     startButton.disabled = false;
-  } 
-};
-function addLeadingZero(number){
+  }
+}
+function addLeadingZero(number) {
   return ('0' + number).slice(-2);
 }
-
 
 function convertMs(ms) {
   const second = 1000;
@@ -95,7 +91,6 @@ function convertMs(ms) {
   const hour = minute * 60;
   const day = hour * 24;
 
-  
   const days = Math.floor(ms / day);
   const hours = Math.floor((ms % day) / hour);
   const minutes = Math.floor(((ms % day) % hour) / minute);
